@@ -42,6 +42,7 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
     	// Apply adjusted positions
     	destinationContainer.style.top = `${top}px`;
     	destinationContainer.style.left = `${left}px`;
+		destinationContainer.style.width = size;
     	destinationContainer.style.transform = "translateX(-50%)";
 
     	return destinationContainer;
@@ -68,6 +69,7 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
 
     	label.className = "roadmap-destination-label";
     	label.textContent = destination.name.split(",")[0];
+		label.style.fontSize = `${size * 0.2}px`;
 
     	return label;
 	}

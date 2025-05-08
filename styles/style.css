@@ -96,29 +96,6 @@ li {
     margin-top: 0.5rem;
 }
 
-/* Adjustments for smaller screens */
-@media (max-width: 768px) {
-    .roadmap-destination {
-        width: 50px; /* Smaller size for destinations */
-        height: 50px;
-    }
-
-    .roadmap-destination-label {
-        font-size: 0.8rem; /* Smaller font size */
-    }
-}
-
-@media (max-width: 480px) {
-    .roadmap-destination {
-        width: 40px;
-        height: 40px;
-    }
-
-    .roadmap-destination-label {
-        font-size: 0.7rem;
-    }
-}
-
 #destination-details {
     display: none; /* Hide the entire section by default */
     margin: 2rem 0;
