@@ -63,13 +63,14 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
     	return newDestination;
 	}
 
-	function    createLabel(destination)
+	function    createLabel(destination, size)
 	{
     	const label = document.createElement("div");
 
     	label.className = "roadmap-destination-label";
     	label.textContent = destination.name.split(",")[0];
 		label.style.fontSize = `${size * 0.2}px`;
+		label.style.width = size;
 
     	return label;
 	}
@@ -117,7 +118,7 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
 
 			const newDestinationContainer = createDestinationContainer(destination, containerWidth, containerHeight, size);
 			const newDestination = createDestination(destination, size);
-			const label = createLabel(destination);
+			const label = createLabel(destination, size);
 
 			newDestinationContainer.appendChild(newDestination);
 			newDestinationContainer.appendChild(label);
