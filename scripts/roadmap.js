@@ -19,7 +19,9 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
     	destinationContainer.className = "roadmap-destination-container";
     	destinationContainer.style.position = "absolute"; // Make it positionable
     
-    	const size = destination.size;
+    	const baseSize = destination.size;
+    	const scaleFactor = Math.min(containerWidth, containerHeight) / 1000; // Adjust scale factor as needed
+    	const size = baseSize * scaleFactor;
 
    		// Define the margin (e.g., 1rem converted to pixels)
   		const margin = 16; // Assuming 1rem = 16px
@@ -72,8 +74,10 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
 
 	function    createPath(prevDestination, destination, containerWidth, containerHeight)
 	{
-    	const size = destination.size;
-    	const top = parseFloat(destination.position.top) / 100 * containerHeight + size / 1.8;
+    	const baseSize = destination.size;
+    	const scaleFactor = Math.min(containerWidth, containerHeight) / 1000; // Adjust scale factor as needed
+    	const size = baseSize * scaleFactor;
+    	const top = parseFloat(destination.position.top) / 100 * containerHeight + size / 2;
     	const left = parseFloat(destination.position.left) / 100 * containerWidth;
     	const prevTop = parseFloat(prevDestination.position.top) / 100 * containerHeight + size / 2;
     	const prevLeft = parseFloat(prevDestination.position.left) / 100 * containerWidth;
