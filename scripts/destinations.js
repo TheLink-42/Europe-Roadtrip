@@ -10,7 +10,7 @@ export const destinations = [
         ]
     },
     { 
-        name: "Mont Saint-Michel, France", 
+        name: "Mont Saint Michel, France", 
         description: "Mont Saint-Michel is a commune in the Manche department of Normandy, France, which includes both a portion of the mainland and the famous Mont Saint-Michel.", 
         image: "assets/images/montSaintMichel.jpg",
         position: { top: "10%", left: "10%" },
