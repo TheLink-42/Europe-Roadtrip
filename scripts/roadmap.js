@@ -102,22 +102,31 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
     	path.setAttribute("stroke-linejoin", "round");
 	}
 
-	destinations.forEach((destination, index) => {
-    	const containerWidth = roadmapContainer.offsetWidth;
-    	const containerHeight = roadmapContainer.offsetHeight;
+	function	render()
+	{
+		roadmapContainer.innerHTML = "";
+		roadmapContainer.appendChild(svg);
+		svg.innerHTML = "";
+		destinations.forEach((destination, index) => {
+			const containerWidth = roadmapContainer.offsetWidth;
+			const containerHeight = roadmapContainer.offsetHeight;
 
-    	const newDestinationContainer = createDestinationContainer(destination, containerWidth, containerHeight);
-    	const newDestination = createDestination(destination);
-	    const label = createLabel(destination);
+			const newDestinationContainer = createDestinationContainer(destination, containerWidth, containerHeight);
+			const newDestination = createDestination(destination);
+			const label = createLabel(destination);
 
-    	newDestinationContainer.appendChild(newDestination);
-    	newDestinationContainer.appendChild(label);
-	    roadmapContainer.appendChild(newDestinationContainer);
+			newDestinationContainer.appendChild(newDestination);
+			newDestinationContainer.appendChild(label);
+			roadmapContainer.appendChild(newDestinationContainer);
 
-    	if (index > 0) {
-       		const path = createPath(destinations[index - 1], destination, containerWidth, containerHeight);
-        	setPath(path);
-    	    svg.appendChild(path);
-	    }
-	});
+			if (index > 0) {
+				const path = createPath(destinations[index - 1], destination, containerWidth, containerHeight);
+				setPath(path);
+				svg.appendChild(path);
+			}
+		});
+	}
+
+	render();
+	window.addEventListener("resize", render);
 }
