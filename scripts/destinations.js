@@ -32,7 +32,7 @@ export const destinations = [
     { 
         name: "Amsterdam, Holanda", 
         description: "Brujas, la capital de Flandes Occidental en el noroeste de Bélgica, se distingue por sus canales, las calles con adoquines y los edificios medievales. Su puerto, Zeebrugge, es un importante centro de pesca y comercio europeo.", 
-        image: "assets/images/brujas.jpg",
+        image: "assets/images/amsterdam.jpg",
         position: { top: "5%", left: "70%" },
         size: 100,
 		pages: [
@@ -43,7 +43,7 @@ export const destinations = [
     { 
         name: "Colonia, Alemania", 
         description: "Brujas, la capital de Flandes Occidental en el noroeste de Bélgica, se distingue por sus canales, las calles con adoquines y los edificios medievales. Su puerto, Zeebrugge, es un importante centro de pesca y comercio europeo.", 
-        image: "assets/images/brujas.jpg",
+        image: "assets/images/colonia.jpg",
         position: { top: "13%", left: "60%" },
         size: 100,
 		pages: [
@@ -51,9 +51,9 @@ export const destinations = [
         ]
     },
     { 
-        name: "Rome, Italy", 
+        name: "Roma, Italia", 
         description: "Rome, the capital of Italy, is a sprawling city with nearly 3,000 years of globally influential art, architecture, and culture on display.", 
-        image: "assets/images/rome.jpg",
+        image: "assets/images/roma.jpg",
         position: { top: "70%", left: "50%" },
         size: 100,
 		pages: [
