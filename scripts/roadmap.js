@@ -70,7 +70,7 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
     	label.className = "roadmap-destination-label";
     	label.textContent = destination.name.split(",")[0];
 		label.style.fontSize = `${size * 0.2}px`;
-		label.style.width = size;
+//		label.style.width = size;
 
     	return label;
 	}
