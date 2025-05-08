@@ -62,28 +62,38 @@ li {
     align-items: center;
     margin: 2rem auto;
     height: 200vh; /* Optional: Set a height to ensure enough space for positioning */
+    width: 100vw;
     overflow: hidden; /* Optional: Prevent elements from overflowing */
 }
 
 .roadmap-destination-container {
-    position: absolute;
-    transform: translate(-50%, -50%);
+    position: relative; /* Ensure the container positions its children relative to itself */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the text directly beneath the circle */
+    margin: 1rem 0;
+    left: 0%; /* Adjust this value to move the entire container horizontally */
+    top: 0; /* Adjust this value to move the entire container vertically */
 }
 
 .roadmap-destination {
     border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.roadmap-destination-label {
-    text-align: center;
-    margin-top: 8px;
-    font-size: 1rem;
 }
 
 .roadmap-destination:hover {
     transform: scale(1.1); /* Slightly enlarge on hover */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+
+.roadmap-destination-label {
+    text-align: center;
+    font-size: 1.2rem;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; /* Black border effect */
+    margin-top: 0.5rem;
 }
 
 /* Adjustments for smaller screens */

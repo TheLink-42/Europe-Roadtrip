@@ -3,25 +3,25 @@ import { displayDetails } from './modal.js';
 
 export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigationButtons)
 {
-	const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-	svg.setAttribute("width", "100%");
-	svg.setAttribute("height", "100%");
-	svg.style.position = "absolute";
-	svg.style.top = "0";
-	svg.style.left = "0";
-	svg.style.zIndex = "0";
-	roadmapContainer.appendChild(svg);
+	function	createSvg()
+	{
+		const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+		svg.setAttribute("width", "100%");
+		svg.setAttribute("height", "100%");
+		svg.style.position = "absolute";
+		svg.style.top = "0";
+		svg.style.left = "0";
+		svg.style.zIndex = "0";
 
-	function    createDestinationContainer(destination, containerWidth, containerHeight)
+		return svg;
+	}
+
+	function    createDestinationContainer(destination, containerWidth, containerHeight, size)
 	{
     	const destinationContainer = document.createElement("div");
 
     	destinationContainer.className = "roadmap-destination-container";
     	destinationContainer.style.position = "absolute"; // Make it positionable
-    
-    	const baseSize = destination.size;
-    	const scaleFactor = Math.min(containerWidth, containerHeight) / 1000; // Adjust scale factor as needed
-    	const size = baseSize * scaleFactor;
 
    		// Define the margin (e.g., 1rem converted to pixels)
   		const margin = 16; // Assuming 1rem = 16px
@@ -47,7 +47,7 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
     	return destinationContainer;
 	}
 
-	function    createDestination(destination)
+	function    createDestination(destination, size)
 	{
     	const newDestination = document.createElement("div");
 
@@ -55,8 +55,8 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
     	newDestination.style.backgroundImage = `url(${destination.image})`;
     	newDestination.style.backgroundSize = "cover";
     	newDestination.style.backgroundPosition = "center";
-    	newDestination.style.width = `${destination.size}px`;
-    	newDestination.style.height = `${destination.size}px`;
+    	newDestination.style.width = `${size}px`;
+    	newDestination.style.height = `${size}px`;
     	newDestination.addEventListener("click", () => displayDetails(destination, modal, modalPages, updateNavigationButtons));
 
     	return newDestination;
@@ -72,11 +72,8 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
     	return label;
 	}
 
-	function    createPath(prevDestination, destination, containerWidth, containerHeight)
+	function    createPath(prevDestination, destination, containerWidth, containerHeight, size)
 	{
-    	const baseSize = destination.size;
-    	const scaleFactor = Math.min(containerWidth, containerHeight) / 1000; // Adjust scale factor as needed
-    	const size = baseSize * scaleFactor;
     	const top = parseFloat(destination.position.top) / 100 * containerHeight + size / 2;
     	const left = parseFloat(destination.position.left) / 100 * containerWidth;
     	const prevTop = parseFloat(prevDestination.position.top) / 100 * containerHeight + size / 2;
@@ -106,7 +103,7 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
     	path.setAttribute("stroke-linejoin", "round");
 	}
 
-	function	render()
+	function	render(size)
 	{
 		roadmapContainer.innerHTML = "";
 		roadmapContainer.appendChild(svg);
@@ -114,9 +111,10 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
 		destinations.forEach((destination, index) => {
 			const containerWidth = roadmapContainer.offsetWidth;
 			const containerHeight = roadmapContainer.offsetHeight;
+			const size = calculateSize(destination, containerWidth, containerHeight);
 
-			const newDestinationContainer = createDestinationContainer(destination, containerWidth, containerHeight);
-			const newDestination = createDestination(destination);
+			const newDestinationContainer = createDestinationContainer(destination, containerWidth, containerHeight, size);
+			const newDestination = createDestination(destination, size);
 			const label = createLabel(destination);
 
 			newDestinationContainer.appendChild(newDestination);
@@ -124,13 +122,24 @@ export function	renderRoadmap(roadmapContainer, modal, modalPages, updateNavigat
 			roadmapContainer.appendChild(newDestinationContainer);
 
 			if (index > 0) {
-				const path = createPath(destinations[index - 1], destination, containerWidth, containerHeight);
+				const path = createPath(destinations[index - 1], destination, containerWidth, containerHeight, size);
 				setPath(path);
 				svg.appendChild(path);
 			}
 		});
 	}
 
+	function	calculateSize(destination, containerWidth, containerHeight)
+	{
+		const baseSize = destination.size;
+   		const scaleFactor = Math.min(containerWidth, containerHeight) / 1000; // Adjust scale factor as needed
+    	const size = baseSize * scaleFactor;
+
+		return size;
+	}
+
+	const svg = createSvg();
+	roadmapContainer.appendChild(svg);
 	render();
 	window.addEventListener("resize", render);
 }
